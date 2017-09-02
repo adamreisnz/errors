@@ -1,6 +1,6 @@
-# meanie-express-errors
+# @meanie/express-errors
 
-[![npm version](https://img.shields.io/npm/v/meanie-express-errors.svg)](https://www.npmjs.com/package/meanie-express-errors)
+[![npm version](https://img.shields.io/npm/v/@meanie/express-errors.svg)](https://www.npmjs.com/package/@meanie/express-errors)
 [![node dependencies](https://david-dm.org/meanie/express-errors.svg)](https://david-dm.org/meanie/express-errors)
 [![github issues](https://img.shields.io/github/issues/meanie/express-errors.svg)](https://github.com/meanie/express-errors/issues)
 
@@ -36,7 +36,7 @@ module.exports = someMiddleware(req, res, next) {
 
 ## Issues & feature requests
 
-Please report any bugs, issues, suggestions and feature requests in the [meanie-express-errors issue tracker](https://github.com/meanie/express-errors/issues).
+Please report any bugs, issues, suggestions and feature requests in the [@meanie/express-errors issue tracker](https://github.com/meanie/express-errors/issues).
 
 ## Contributing
 
