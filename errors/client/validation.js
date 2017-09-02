@@ -59,7 +59,14 @@ class ValidationError extends ClientError {
   }
 
   /**
-   * Helper to
+   * Check if an error is a mongoose error
+   */
+  static isMongooseError(error) {
+    return (typeof error === 'object' && error.name === 'MongooseError');
+  }
+
+  /**
+   * Helper to convert mongoose error to validation error
    */
   static fromMongoose(mongooseError) {
 
