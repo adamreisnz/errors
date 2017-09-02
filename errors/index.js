@@ -32,6 +32,6 @@ exports.ValidationError = require('./client/validation');
 /**
  * Server types
  */
-exports.SendMailError = require('./server/send-mail');
+exports.MailError = require('./server/mail');
 exports.ServiceUnavailableError = require('./server/service-unavailable');
 exports.GatewayTimeoutError = require('./server/gateway-timeout');
