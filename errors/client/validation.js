@@ -85,6 +85,20 @@ class ValidationError extends ClientError {
     //Create new error
     return new ValidationError(message, data);
   }
+
+  /**
+   * Create validation error for a specific field
+   */
+  static forField(field, type, message = 'Invalid value') {
+
+    //Create data
+    const data = {fields: {
+      [field]: {type, message},
+    }};
+
+    //Create error
+    return new ValidationError(data);
+  }
 }
 
 //Export
