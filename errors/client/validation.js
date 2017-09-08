@@ -89,7 +89,7 @@ class ValidationError extends ClientError {
   /**
    * Create validation error for a specific field
    */
-  static forField(field, type, message = 'Invalid value') {
+  static forField(field, type = 'invalid', message = 'Invalid value') {
 
     //Create data
     const data = {fields: {
