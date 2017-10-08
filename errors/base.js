@@ -14,8 +14,10 @@ class BaseError extends Error {
     super(message);
 
     //If used another error as constructor, copy those properties
+    //NOTE: must manually copy stack
     if (message && message instanceof Error) {
       Object.assign(this, message);
+      this.stack = message.stack;
     }
 
     //Otherwise, check if data given as first parameter
