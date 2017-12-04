@@ -50,22 +50,6 @@ class BaseError extends Error {
   }
 
   /**
-   * From JSON
-   */
-  fromJSON(json, status) {
-
-    //Extract data
-    const {name, message, code, data} = json;
-
-    //Create new error and set name and code
-    const error = new this(message, data, status);
-    Object.assign(error, {name, code});
-
-    //Return
-    return error;
-  }
-
-  /**
    * To JSON
    */
   toJSON() {
@@ -91,6 +75,22 @@ class BaseError extends Error {
 
     //Retun JSON
     return json;
+  }
+
+  /**
+   * From JSON
+   */
+  static fromJSON(json, status) {
+
+    //Extract data
+    const {name, message, code, data} = json;
+
+    //Create new error and set name and code
+    const error = new this(message, data, status);
+    Object.assign(error, {name, code});
+
+    //Return
+    return error;
   }
 }
 
