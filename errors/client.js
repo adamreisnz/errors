@@ -22,7 +22,7 @@ class ClientError extends BaseError {
     }
 
     //Check if status valid
-    if (status < 400 || status > 499) {
+    if (!status || status < 400 || status > 499) {
       status = 400;
     }
 
