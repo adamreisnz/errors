@@ -41,16 +41,26 @@ class ValidationError extends ClientError {
     let message = 'Validation error';
 
     //No data or not the expected structure?
-    if (!data || typeof data !== 'object' || !data.fields) {
+    if (!data || typeof data !== 'object') {
       return message;
     }
 
-    //Append fields
-    const {fields} = data;
-    for (const field in fields) {
-      if (fields.hasOwnProperty(field)) {
-        const {type, message: fieldMessage} = fields[field];
+    //Array
+    if (Array.isArray(data)) {
+      for (const error of data) {
+        const {field, type, message: fieldMessage} = error;
         message += `\n  - ${field}: ${fieldMessage} (${type})`;
+      }
+    }
+
+    //Fields object
+    else if (data.fields) {
+      const {fields} = data;
+      for (const field in fields) {
+        if (fields.hasOwnProperty(field)) {
+          const {type, message: fieldMessage} = fields[field];
+          message += `\n  - ${field}: ${fieldMessage} (${type})`;
+        }
       }
     }
 
