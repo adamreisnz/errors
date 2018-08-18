@@ -37,32 +37,21 @@ class ValidationError extends ClientError {
    */
   static createMessage(data) {
 
-    //Initialize
-    let message = 'Validation error';
-
-    //No data or not the expected structure?
+    //No data or not an object?
     if (!data || typeof data !== 'object') {
-      return message;
+      return 'Validation error';
+    }
+
+    //Not an array
+    if (!Array.isArray(data)) {
+      data = [data];
     }
 
     //Array
-    if (Array.isArray(data)) {
-      message = `${data.length} validation errors`;
-      for (const error of data) {
-        const {field, type, message: fieldMessage} = error;
-        message += `\n  - ${field}: ${fieldMessage} (${type})`;
-      }
-    }
-
-    //Fields object
-    else if (data.fields) {
-      const {fields} = data;
-      for (const field in fields) {
-        if (fields.hasOwnProperty(field)) {
-          const {type, message: fieldMessage} = fields[field];
-          message += `\n  - ${field}: ${fieldMessage} (${type})`;
-        }
-      }
+    let message = `${data.length} validation errors occurred`;
+    for (const error of data) {
+      const {field, type, message: fieldMessage} = error;
+      message += `\n  - ${field}: ${fieldMessage} (${type})`;
     }
 
     //Return
@@ -83,32 +72,18 @@ class ValidationError extends ClientError {
 
     //Get info from error and initialize data
     const {message, errors} = mongooseError;
-    const data = {fields: {}};
+    const data = [];
 
     //Initialize data for validation error
     for (const field in errors) {
       if (errors.hasOwnProperty(field)) {
         const {kind: type, message} = errors[field];
-        data.fields[field] = {type, message};
+        data.push({field, type, message});
       }
     }
 
     //Create new error
     return new ValidationError(message, data);
-  }
-
-  /**
-   * Create validation error for a specific field
-   */
-  static forField(field, type = 'invalid', message = 'Invalid value') {
-
-    //Create data
-    const data = {fields: {
-      [field]: {type, message},
-    }};
-
-    //Create error
-    return new ValidationError(data);
   }
 }
 
