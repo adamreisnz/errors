@@ -47,6 +47,7 @@ class ValidationError extends ClientError {
 
     //Array
     if (Array.isArray(data)) {
+      message = `${data.length} validation errors`;
       for (const error of data) {
         const {field, type, message: fieldMessage} = error;
         message += `\n  - ${field}: ${fieldMessage} (${type})`;
