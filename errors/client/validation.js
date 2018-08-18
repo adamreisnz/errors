@@ -37,17 +37,19 @@ class ValidationError extends ClientError {
    */
   static createMessage(data) {
 
+    //Object with single validation error
+    if (typeof data === 'object') {
+      if (data.field && data.type) {
+        data = [data];
+      }
+    }
+
     //No data or not an object?
-    if (!data || typeof data !== 'object') {
+    if (!data || !Array.isArray(data)) {
       return 'Validation error';
     }
 
-    //Not an array
-    if (!Array.isArray(data)) {
-      data = [data];
-    }
-
-    //Array
+    //Array of validation errors
     let message = `${data.length} validation errors occurred`;
     for (const error of data) {
       const {field, type, message: fieldMessage} = error;
