@@ -13,13 +13,13 @@ class MailError extends ServerError {
   /**
    * Constructor
    */
-  constructor(message) {
+  constructor(message, data, status) {
 
     //Default message
     message = message || 'Mail error';
 
     //Parent constructor
-    super(message);
+    super(message, data, status);
 
     //Set data
     this.code = 'MAIL_ERROR';
