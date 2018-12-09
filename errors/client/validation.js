@@ -44,7 +44,7 @@ class ValidationError extends ClientError {
       }
     }
 
-    //No data or not an object?
+    //No data or not an array?
     if (!data || !Array.isArray(data)) {
       return 'Validation error';
     }
