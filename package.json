@@ -1,7 +1,7 @@
 {
   "name": "@meanie/express-errors",
   "description": "A collection of error classes for use in Express",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "homepage": "https://github.com/meanie/express-errors",
   "author": {
     "name": "Adam Reis",
