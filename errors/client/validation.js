@@ -39,7 +39,7 @@ class ValidationError extends ClientError {
 
     //Object with single validation error
     if (typeof data === 'object') {
-      if (data.field && data.type) {
+      if (data.path && data.type) {
         data = [data];
       }
     }
@@ -52,12 +52,19 @@ class ValidationError extends ClientError {
     //Array of validation errors
     let message = `${data.length} validation errors occurred`;
     for (const error of data) {
-      const {field, type, message: fieldMessage} = error;
-      message += `\n  - ${field}: ${fieldMessage} (${type})`;
+      const {path, type, message: pathMessage} = error;
+      message += `\n  - ${path}: ${pathMessage} (${type})`;
     }
 
     //Return
     return message;
+  }
+
+  /**
+   * Check if an error is a Joi validation error
+   */
+  static isJoiError(error) {
+    return (typeof error === 'object' && error.isJoi);
   }
 
   /**
@@ -72,6 +79,26 @@ class ValidationError extends ClientError {
   }
 
   /**
+   * Helper to convert Joi error to validation error
+   */
+  static fromJoi(joiError) {
+
+    //Get details
+    const {details} = joiError;
+    const data = [];
+
+    //Initialize data for validation error
+    for (const item of details) {
+      const {type, message} = item;
+      const path = item.path.join('.');
+      data.push({path, type, message});
+    }
+
+    //Create new error
+    return new ValidationError(data);
+  }
+
+  /**
    * Helper to convert mongoose error to validation error
    */
   static fromMongoose(mongooseError) {
@@ -81,10 +108,10 @@ class ValidationError extends ClientError {
     const data = [];
 
     //Initialize data for validation error
-    for (const field in errors) {
-      if (errors.hasOwnProperty(field)) {
-        const {kind: type, message} = errors[field];
-        data.push({field, type, message});
+    for (const path in errors) {
+      if (errors.hasOwnProperty(path)) {
+        const {kind: type, message} = errors[path];
+        data.push({path, type, message});
       }
     }
 
