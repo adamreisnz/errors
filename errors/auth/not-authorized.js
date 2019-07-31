@@ -13,13 +13,13 @@ class NotAuthorizedError extends ClientError {
   /**
    * Constructor
    */
-  constructor(message) {
+  constructor(message, data = null) {
 
     //Default message
     message = message || 'Not authorized';
 
     //Parent constructor
-    super(message, 403);
+    super(message, data, 403);
 
     //Set data
     this.code = 'NOT_AUTHORIZED';
