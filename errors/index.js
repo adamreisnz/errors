@@ -16,6 +16,7 @@ exports.NotAuthorizedError = require('./auth/not-authorized');
 exports.UserArchivedError = require('./auth/user-archived');
 exports.UserPendingError = require('./auth/user-pending');
 exports.UserSuspendedError = require('./auth/user-suspended');
+exports.PlanExpiredError = require('./auth/plan-expired');
 
 /**
  * Client types
