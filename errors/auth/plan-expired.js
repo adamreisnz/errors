@@ -3,12 +3,12 @@
 /**
  * Dependencies
  */
-const NotAuthorizedError = require('./not-authorized');
+const NotAuthenticatedError = require('./not-authenticated');
 
 /**
  * Error class
  */
-class PlanExpiredError extends NotAuthorizedError {
+class PlanExpiredError extends NotAuthenticatedError {
 
   /**
    * Constructor
