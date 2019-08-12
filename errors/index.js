@@ -27,6 +27,7 @@ exports.ExpiredTokenError = require('./client/expired-token');
 exports.FileTooLargeError = require('./client/file-too-large');
 exports.InvalidDataError = require('./client/invalid-data');
 exports.InvalidTokenError = require('./client/invalid-token');
+exports.NotConnectedError = require('./client/not-connected');
 exports.NotFoundError = require('./client/not-found');
 exports.TooManyRequestsError = require('./client/too-many-requests');
 exports.ValidationError = require('./client/validation');
