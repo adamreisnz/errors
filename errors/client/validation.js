@@ -109,7 +109,7 @@ class ValidationError extends ClientError {
 
     //Initialize data for validation error
     for (const path in errors) {
-      if (errors.hasOwnProperty(path)) {
+      if (Object.prototype.hasOwnProperty.call(errors, path)) {
         const {kind: type, message} = errors[path];
         data.push({path, type, message});
       }
