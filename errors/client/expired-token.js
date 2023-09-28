@@ -1,14 +1,9 @@
-'use strict';
-
-/**
- * Dependencies
- */
-const InvalidTokenError = require('./invalid-token');
+import InvalidTokenError from './invalid-token.js'
 
 /**
  * Error class
  */
-class ExpiredTokenError extends InvalidTokenError {
+export default class ExpiredTokenError extends InvalidTokenError {
 
   /**
    * Constructor
@@ -16,15 +11,12 @@ class ExpiredTokenError extends InvalidTokenError {
   constructor(message) {
 
     //Default message
-    message = message || 'Expired token';
+    message = message || 'Expired token'
 
     //Parent constructor
-    super(message);
+    super(message)
 
     //Set data
-    this.code = 'EXPIRED_TOKEN';
+    this.code = 'EXPIRED_TOKEN'
   }
 }
-
-//Export
-module.exports = ExpiredTokenError;

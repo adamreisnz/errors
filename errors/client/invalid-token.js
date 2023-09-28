@@ -1,14 +1,9 @@
-'use strict';
-
-/**
- * Dependencies
- */
-const ClientError = require('../client');
+import ClientError from '../client.js'
 
 /**
  * Error class
  */
-class InvalidTokenError extends ClientError {
+export default class InvalidTokenError extends ClientError {
 
   /**
    * Constructor
@@ -16,16 +11,13 @@ class InvalidTokenError extends ClientError {
   constructor(message) {
 
     //Default message
-    message = message || 'Invalid token';
+    message = message || 'Invalid token'
 
     //Parent constructor
-    super(message);
+    super(message)
 
     //Set data
-    this.code = 'INVALID_TOKEN';
-    this.isTrivial = true;
+    this.code = 'INVALID_TOKEN'
+    this.isTrivial = true
   }
 }
-
-//Export
-module.exports = InvalidTokenError;

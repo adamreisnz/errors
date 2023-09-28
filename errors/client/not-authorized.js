@@ -3,7 +3,7 @@ import ClientError from '../client.js'
 /**
  * Error class
  */
-export default class InvalidDataError extends ClientError {
+export default class NotAuthorizedError extends ClientError {
 
   /**
    * Constructor
@@ -11,12 +11,13 @@ export default class InvalidDataError extends ClientError {
   constructor(message, data) {
 
     //Default message
-    message = message || 'Invalid data'
+    message = message || 'Not authorized'
 
     //Parent constructor
-    super(message, data, 422)
+    super(message, data, 403)
 
     //Set data
-    this.code = 'INVALID_DATA'
+    this.code = 'NOT_AUTHORIZED'
+    this.isTrivial = true
   }
 }

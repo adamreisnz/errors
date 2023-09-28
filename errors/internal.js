@@ -1,14 +1,9 @@
-'use strict';
+import BaseError from './base.js'
 
 /**
- * Dependencies
+ * Error class
  */
-const BaseError = require('./base');
-
-/**
- * Internal error
- */
-class InternalError extends BaseError {
+export default class InternalError extends BaseError {
 
   /**
    * Constructor
@@ -16,11 +11,11 @@ class InternalError extends BaseError {
   constructor(error) {
 
     //Call parent constructor
-    super(error);
+    super(error)
 
     //Set data
-    this.code = 'INTERNAL_ERROR';
-    this.status = 500;
+    this.code = 'INTERNAL_ERROR'
+    this.status = 500
   }
 
   /**
@@ -28,26 +23,23 @@ class InternalError extends BaseError {
    */
   static isInternalError(error) {
     if (error instanceof EvalError) {
-      return true;
+      return true
     }
     if (error instanceof TypeError) {
-      return true;
+      return true
     }
     if (error instanceof RangeError) {
-      return true;
+      return true
     }
     if (error instanceof ReferenceError) {
-      return true;
+      return true
     }
     if (error instanceof SyntaxError) {
-      return true;
+      return true
     }
     if (error instanceof URIError) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 }
-
-//Export
-module.exports = InternalError;

@@ -1,14 +1,9 @@
-'use strict';
-
-/**
- * Dependencies
- */
-const ClientError = require('../client');
+import ClientError from '../client.js'
 
 /**
  * Error class
  */
-class NotConnectedError extends ClientError {
+export default class NotConnectedError extends ClientError {
 
   /**
    * Constructor
@@ -16,16 +11,13 @@ class NotConnectedError extends ClientError {
   constructor(message, data) {
 
     //Default message
-    message = message || 'Not Connected';
+    message = message || 'Not Connected'
 
     //Parent constructor
-    super(message, data, 400);
+    super(message, data, 400)
 
     //Set data
-    this.code = 'NOT_CONNECTED';
-    this.isTrivial = true;
+    this.code = 'NOT_CONNECTED'
+    this.isTrivial = true
   }
 }
-
-//Export
-module.exports = NotConnectedError;

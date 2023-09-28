@@ -1,14 +1,9 @@
-'use strict';
-
-/**
- * Dependencies
- */
-const ClientError = require('../client');
+import ClientError from '../client.js'
 
 /**
  * Error class
  */
-class BadRequestError extends ClientError {
+export default class BadRequestError extends ClientError {
 
   /**
    * Constructor
@@ -16,15 +11,12 @@ class BadRequestError extends ClientError {
   constructor(message, data) {
 
     //Default message
-    message = message || 'Bad request';
+    message = message || 'Bad request'
 
     //Parent constructor
-    super(message, data, 400);
+    super(message, data, 400)
 
     //Set data
-    this.code = 'BAD_REQUEST';
+    this.code = 'BAD_REQUEST'
   }
 }
-
-//Export
-module.exports = BadRequestError;

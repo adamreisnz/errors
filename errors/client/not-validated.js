@@ -1,14 +1,9 @@
-'use strict';
-
-/**
- * Dependencies
- */
-const ClientError = require('../client');
+import ClientError from '../client.js'
 
 /**
  * Error class
  */
-class ValidationError extends ClientError {
+export default class NotValidatedError extends ClientError {
 
   /**
    * Constructor
@@ -17,19 +12,19 @@ class ValidationError extends ClientError {
 
     //Object given?
     if (typeof message === 'object') {
-      data = message;
-      message = '';
+      data = message
+      message = ''
     }
 
     //Default message
-    message = message || ValidationError.createMessage(data);
+    message = message || NotValidatedError.createMessage(data)
 
     //Parent constructor
-    super(message, data, 422);
+    super(message, data, 422)
 
     //Set data
-    this.code = 'NOT_VALIDATED';
-    this.isTrivial = isTrivial;
+    this.code = 'NOT_VALIDATED'
+    this.isTrivial = isTrivial
   }
 
   /**
@@ -40,31 +35,31 @@ class ValidationError extends ClientError {
     //Object with single validation error
     if (typeof data === 'object') {
       if (data.path && data.type) {
-        data = [data];
+        data = [data]
       }
     }
 
     //No data or not an array?
     if (!data || !Array.isArray(data)) {
-      return 'Validation error';
+      return 'Validation error'
     }
 
     //Array of validation errors
-    let message = `${data.length} validation errors occurred`;
+    let message = `${data.length} validation errors occurred`
     for (const error of data) {
-      const {path, type, message: pathMessage} = error;
-      message += `\n  - ${path}: ${pathMessage} (${type})`;
+      const {path, type, message: pathMessage} = error
+      message += `\n  - ${path}: ${pathMessage} (${type})`
     }
 
     //Return
-    return message;
+    return message
   }
 
   /**
    * Check if an error is a Joi validation error
    */
   static isJoiError(error) {
-    return (typeof error === 'object' && error.isJoi);
+    return (typeof error === 'object' && error.isJoi)
   }
 
   /**
@@ -75,7 +70,7 @@ class ValidationError extends ClientError {
       typeof error === 'object' &&
       (error.name === 'MongooseError' || error.name === 'ValidationError') &&
       typeof error.errors !== 'undefined'
-    );
+    )
   }
 
   /**
@@ -84,18 +79,18 @@ class ValidationError extends ClientError {
   static fromJoi(joiError) {
 
     //Get details
-    const {details} = joiError;
-    const data = [];
+    const {details} = joiError
+    const data = []
 
     //Initialize data for validation error
     for (const item of details) {
-      const {type, message} = item;
-      const path = item.path.join('.');
-      data.push({path, type, message});
+      const {type, message} = item
+      const path = item.path.join('.')
+      data.push({path, type, message})
     }
 
     //Create new error
-    return new ValidationError(data);
+    return new NotValidatedError(data)
   }
 
   /**
@@ -104,21 +99,18 @@ class ValidationError extends ClientError {
   static fromMongoose(mongooseError) {
 
     //Get info from error and initialize data
-    const {message, errors} = mongooseError;
-    const data = [];
+    const {message, errors} = mongooseError
+    const data = []
 
     //Initialize data for validation error
     for (const path in errors) {
       if (Object.prototype.hasOwnProperty.call(errors, path)) {
-        const {kind: type, message} = errors[path];
-        data.push({path, type, message});
+        const {kind: type, message} = errors[path]
+        data.push({path, type, message})
       }
     }
 
     //Create new error
-    return new ValidationError(message, data);
+    return new NotValidatedError(message, data)
   }
 }
-
-//Export
-module.exports = ValidationError;

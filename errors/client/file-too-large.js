@@ -1,14 +1,9 @@
-'use strict';
-
-/**
- * Dependencies
- */
-const BadRequestError = require('./bad-request');
+import BadRequestError from './bad-request.js'
 
 /**
  * Error class
  */
-class FileTooLargeError extends BadRequestError {
+export default class FileTooLargeError extends BadRequestError {
 
   /**
    * Constructor
@@ -17,24 +12,21 @@ class FileTooLargeError extends BadRequestError {
 
     //Parameter juggling
     if (typeof message === 'number') {
-      maxFileSize = message;
-      message = '';
+      maxFileSize = message
+      message = ''
     }
 
     //Default message
-    message = message || 'File too large';
+    message = message || 'File too large'
 
     //Create data
-    const data = maxFileSize ? {maxFileSize} : null;
+    const data = maxFileSize ? {maxFileSize} : null
 
     //Parent constructor
-    super(message, data);
+    super(message, data)
 
     //Set data
-    this.code = 'FILE_TOO_LARGE';
-    this.isTrivial = true;
+    this.code = 'FILE_TOO_LARGE'
+    this.isTrivial = true
   }
 }
-
-//Export
-module.exports = FileTooLargeError;

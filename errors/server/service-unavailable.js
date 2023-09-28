@@ -1,14 +1,9 @@
-'use strict';
-
-/**
- * Dependencies
- */
-const ServerError = require('../server');
+import ServerError from '../server.js'
 
 /**
  * Error class
  */
-class ServiceUnavailableError extends ServerError {
+export default class ServiceUnavailableError extends ServerError {
 
   /**
    * Constructor
@@ -16,16 +11,13 @@ class ServiceUnavailableError extends ServerError {
   constructor(message) {
 
     //Default message
-    message = message || 'Service unavailable';
+    message = message || 'Service unavailable'
 
     //Parent constructor
-    super(message, 503);
+    super(message, 503)
 
     //Set data
-    this.code = 'SERVICE_UNAVAILABLE';
-    this.isTrivial = true;
+    this.code = 'SERVICE_UNAVAILABLE'
+    this.isTrivial = true
   }
 }
-
-//Export
-module.exports = ServiceUnavailableError;

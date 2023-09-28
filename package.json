@@ -1,12 +1,11 @@
 {
-  "name": "@meanie/express-errors",
-  "description": "A collection of error classes for use in Express",
-  "version": "5.3.2",
-  "homepage": "https://github.com/meanie/express-errors",
+  "name": "@reis/errors",
+  "description": "A collection of common error classes",
+  "version": "6.0.0",
+  "homepage": "https://github.com/adamreisnz/express-errors",
   "author": {
     "name": "Adam Reis",
-    "email": "adam@reis.nz",
-    "url": "https://adam.reis.nz/"
+    "email": "adam@reis.nz"
   },
   "contributors": [],
   "license": "MIT",
@@ -15,13 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/meanie/express-errors"
+    "url": "https://github.com/adamreisnz/express-errors"
   },
   "bugs": {
-    "url": "https://github.com/meanie/express-errors/issues"
+    "url": "https://github.com/adamreisnz/express-errors/issues"
   },
   "keywords": [
-    "meanie",
     "express",
     "errors",
     "error",
@@ -29,10 +27,10 @@
     "classes"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=18"
   },
   "main": "index.js",
   "scripts": {
-    "postversion": "git push && git push --tags && npm publish"
+    "postversion": "git push && npm publish"
   }
 }
