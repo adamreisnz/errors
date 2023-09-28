@@ -1,7 +1,8 @@
 {
   "name": "@reis/errors",
   "description": "A collection of common error classes",
-  "version": "6.0.0",
+  "version": "6.0.1",
+  "type": "module",
   "homepage": "https://github.com/adamreisnz/express-errors",
   "author": {
     "name": "Adam Reis",
